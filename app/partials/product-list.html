@@ -36,12 +36,13 @@
       <ul class="products media-list">
         <li ng-repeat="product in products | filter:query | orderBy:orderProp" class="media">
           <a class="thumbnail pull-left" href="#">
-            <img class="media-object" src="http://thetased.files.wordpress.com/2010/09/sushi2.jpg" alt="SUSHI" width="120">
+            <img class="media-object" src="http://responsive.hybris.com:9001{{product.images[0].url}}" alt="SUSHI" width="120">
           </a>
           <div class="media-body">
             <a href="#/products/{{product.id}}">
               <h4 class="media-heading">{{product.name}}</h4>
             </a>
+            {{product.price.formattedValue}}
           </div>
         </li>
       </ul>
