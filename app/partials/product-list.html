@@ -34,7 +34,7 @@
       <!--Body content-->
 
       <ul class="products media-list">
-        <li ng-repeat="product in products | filter:query | orderBy:orderProp" class="media">
+        <li ng-repeat="product in searchResult.products | filter:query | orderBy:orderProp" class="media">
           <a class="thumbnail pull-left" href="#">
             <img class="media-object" src="http://responsive.hybris.com:9001{{product.images[0].url}}" alt="SUSHI" width="120">
           </a>
