@@ -1,25 +1,48 @@
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
       <!--Sidebar content-->
+      <form class="form-horizontal">
+        <fieldset>
 
-      Search: <input ng-model="query">
-      Sort by:
-      <select ng-model="orderProp">
-        <option value="name">Alphabetical</option>
-      </select>
+        <!-- Form Name -->
+        <legend>Filter Products</legend>
 
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Search</label>  
+          <div class="col-md-8">
+          <input ng-model="query" id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md3">
+          </div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="selectbasic">Select Basic</label>
+          <div class="col-md-8">
+            <select ng-model="orderProp" id="selectbasic" name="selectbasic" class="form-control input-md">
+              <option value="name">Alphabetical</option>
+            </select>
+          </div>
+        </div>
+
+        </fieldset>
+      </form>
     </div>
-    <div class="span10">
+    <div class="col-md-8">
       <!--Body content-->
 
-      <ul class="phones">
-        <li ng-repeat="product in products | filter:query | orderBy:orderProp" class="thumbnail">
-            <!--
-          <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>-->
-          <a href="#/products/{{product.id}}">{{product.name}}</a>
-            <!--
-          <p>{{phone.snippet}}</p>-->
+      <ul class="phones media-list">
+        <li ng-repeat="product in products | filter:query | orderBy:orderProp" class="media">
+          <a class="thumbnail pull-left" href="#">
+            <img class="media-object" src="http://thetased.files.wordpress.com/2010/09/sushi2.jpg" alt="SUSHI" width="120">
+          </a>
+          <div class="media-body">
+            <a href="#/products/{{product.id}}">
+              <h4 class="media-heading">{{product.name}}</h4>
+            </a>
+          </div>
         </li>
       </ul>
 
