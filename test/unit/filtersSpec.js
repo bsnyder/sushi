@@ -1,6 +1,6 @@
 'use strict';
 
-/* jasmine specs for filters go here */
+/* jasmine specs for filters go here
 
 describe('filter', function() {
 
@@ -15,4 +15,4 @@ describe('filter', function() {
       expect(checkmarkFilter(false)).toBe('\u2718');
     }));
   });
-});
+});*/

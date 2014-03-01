@@ -2,21 +2,11 @@
 
 /* Controllers */
 
-var phonecatControllers = angular.module('phonecatControllers', []);
+var productControllers = angular.module('productControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
-  function($scope, Phone) {
-    $scope.phones = Phone.query();
+productControllers.controller('ProductListCtrl', ['$scope', 'ProductSvc',
+  function($scope, ProductSvc) {
+    $scope.products = ProductSvc.query();
     $scope.orderProp = 'name';
   }]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
-  function($scope, $routeParams, Phone) {
-    $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-      $scope.mainImageUrl = phone.images[0];
-    });
-
-    $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = imageUrl;
-    }
-  }]);

@@ -1,7 +1,7 @@
 'use strict';
 
 /* jasmine specs for controllers go here */
-describe('PhoneCat controllers', function() {
+describe('Product controllers', function() {
 
   beforeEach(function(){
     this.addMatchers({
@@ -11,37 +11,37 @@ describe('PhoneCat controllers', function() {
     });
   });
 
-  beforeEach(module('phonecatApp'));
-  beforeEach(module('phonecatServices'));
+  beforeEach(module('productApp'));
+  beforeEach(module('productServices'));
 
-  describe('PhoneListCtrl', function(){
+  describe('ProductListCtrl', function(){
     var scope, ctrl, $httpBackend;
 
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('data/data.json').
-          respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
+      $httpBackend.expectGET('data/products.json').
+          respond([{name: 'Shirt'}, {name: 'Hat'}]);
 
       scope = $rootScope.$new();
-      ctrl = $controller('PhoneListCtrl', {$scope: scope});
+      ctrl = $controller('ProductListCtrl', {$scope: scope});
     }));
 
 
     it('should create "data" model with 2 data fetched from xhr', function() {
-      expect(scope.phones).toEqualData([]);
+      expect(scope.products).toEqualData([]);
       $httpBackend.flush();
 
-      expect(scope.phones).toEqualData(
-          [{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
+      expect(scope.products).toEqualData(
+          [{name: 'Shirt'}, {name: 'Hat'}]);
     });
 
 
     it('should set the default value of orderProp model', function() {
-      expect(scope.orderProp).toBe('age');
+      expect(scope.orderProp).toBe('name');
     });
   });
 
-
+/*
   describe('PhoneDetailCtrl', function(){
     var scope, $httpBackend, ctrl,
         xyzPhoneData = function() {
@@ -68,5 +68,5 @@ describe('PhoneCat controllers', function() {
 
       expect(scope.phone).toEqualData(xyzPhoneData());
     });
-  });
+  });*/
 });
