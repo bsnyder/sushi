@@ -13,7 +13,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="textinput">Search</label>  
           <div class="col-md-8">
-            <input ng-model="query" ng-change="change()" id="textinput" name="textinput" type="text" placeholder="Enter your search text" class="form-control input-md3">
+            <input ng-model="query" ng-change="searchChange()" id="textinput" name="textinput" type="text" placeholder="Enter your search text" class="form-control input-md3">
           </div>
         </div>
 
@@ -26,6 +26,14 @@
               <option value="price.value">Price</option>
             </select>
           </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Items per page</label>
+            <div class="col-md-8">
+                <input ng-model="pageSize" ng-change="pageSizeChange()" id="pageSize" name="pageSize" type="text" placeholder="10" class="form-control input-md3">
+            </div>
         </div>
 
         </fieldset>

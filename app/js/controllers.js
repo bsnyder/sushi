@@ -9,10 +9,16 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'Product
     $scope.searchResult = products;
     $scope.orderProp = 'name';
 
-    $scope.change = function() {
+    $scope.searchChange = function() {
         if ($scope.query.length > 1) {
-            $scope.searchResult = ProductSvc.query({query: $scope.query});
+            $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize});
         }
     };
+
+      $scope.pageSizeChange = function() {
+          if ($scope.pageSize.length > 0) {
+              $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize});
+          }
+      };
   }]);
 
