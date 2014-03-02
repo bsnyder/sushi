@@ -6,14 +6,14 @@
         <fieldset>
 
         <!-- Form Name -->
-        <legend>Filter Products</legend>
+        <legend>Product Search</legend>
 
 
         <!-- Text input-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="textinput">Search</label>  
           <div class="col-md-8">
-          <input ng-model="query" id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md3">
+            <input ng-model="query" ng-change="change()" id="textinput" name="textinput" type="text" placeholder="Enter your search text" class="form-control input-md3">
           </div>
         </div>
 
@@ -23,7 +23,7 @@
           <div class="col-md-8">
             <select ng-model="orderProp" id="selectbasic" name="selectbasic" class="form-control input-md">
               <option value="name">Alphabetical</option>
-                <option value="price.value">Price</option>
+              <option value="price.value">Price</option>
             </select>
           </div>
         </div>
@@ -35,7 +35,7 @@
       <!--Body content-->
 
       <ul class="products media-list">
-        <li ng-repeat="product in searchResult.products | filter:query | orderBy:orderProp" class="media">
+        <li ng-repeat="product in searchResult.products | orderBy:orderProp" class="media">
           <a class="thumbnail pull-left" href="#">
             <img class="media-object" src="http://responsive.hybris.com:9001{{product.images[0].url}}" alt="SUSHI" width="120">
           </a>
