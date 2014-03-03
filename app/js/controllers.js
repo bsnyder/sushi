@@ -11,28 +11,24 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'Product
         // default values
         $scope.orderProp = 'name';
         $scope.pageSize = '3';
-        $scope.currentPage = '0';
 
         // on change event of search input
         $scope.searchChange = function () {
             if ($scope.query.length > 1) {
-                $scope.currentPage = '0';
-                $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: $scope.currentPage});
+                $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: 0});
             }
         };
 
         // on change event of page size input
         $scope.pageSizeChange = function () {
             if ($scope.pageSize.length > 0) {
-                $scope.currentPage = '0';
-                $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: $scope.currentPage});
+                $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: 0});
             }
         };
 
         // pagination
         $scope.setPage = function (pageNo) {
-            $scope.currentPage = pageNo;
-            $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: $scope.currentPage});
+            $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: pageNo-1});
         };
     }]);
 

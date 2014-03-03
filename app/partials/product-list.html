@@ -1,61 +1,71 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <!--Sidebar content-->
-      <form class="form-horizontal">
-        <fieldset>
+    <div class="row">
+        <div class="col-md-4">
+            <!--Sidebar content-->
+            <form class="form-horizontal">
+                <fieldset>
 
-        <!-- Form Name -->
-        <legend>Product Search</legend>
+                    <!-- Form Name -->
+                    <legend>Product Search</legend>
 
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Search</label>  
-          <div class="col-md-8">
-            <input ng-model="query" ng-change="searchChange()" id="textinput" name="textinput" type="text" placeholder="Enter your search text" class="form-control input-md3">
-          </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Search</label>
+
+                        <div class="col-md-8">
+                            <input ng-model="query" ng-change="searchChange()" id="textinput" name="textinput"
+                                   type="text" placeholder="Enter your search text" class="form-control input-md3">
+                        </div>
+                    </div>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="selectbasic">Sort By</label>
+
+                        <div class="col-md-8">
+                            <select ng-model="orderProp" id="selectbasic" name="selectbasic"
+                                    class="form-control input-md">
+                                <option value="name">Alphabetical</option>
+                                <option value="price.value">Price</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Items per page</label>
+
+                        <div class="col-md-8">
+                            <input ng-model="pageSize" ng-change="pageSizeChange()" id="pageSize" name="pageSize"
+                                   type="text" placeholder="3" class="form-control input-md3">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
+        <div class="col-md-8">
+            <!--Body content-->
 
-        <!-- Select Basic -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="selectbasic">Sort By</label>
-          <div class="col-md-8">
-            <select ng-model="orderProp" id="selectbasic" name="selectbasic" class="form-control input-md">
-              <option value="name">Alphabetical</option>
-              <option value="price.value">Price</option>
-            </select>
-          </div>
+            <ul class="products media-list">
+                <li ng-repeat="product in searchResult.products | orderBy:orderProp" class="media">
+                    <a class="thumbnail pull-left" href="#">
+                        <img class="media-object" src="http://responsive.hybris.com:9001{{product.images[0].url}}"
+                             alt="SUSHI" width="120">
+                    </a>
+
+                    <div class="media-body">
+                        <a href="#/products/{{product.id}}">
+                            <h4 class="media-heading">{{product.name}}</h4>
+                        </a>
+                        {{product.price.formattedValue}}
+                    </div>
+                </li>
+            </ul>
+            <pagination on-select-page="setPage(page)" total-items="searchResult.pagination.totalResults"
+                        page="searchResult.pagination.currentPage + 1"
+                        items-per-page="pageSize" max-size="5" class="pagination-sm"
+                        boundary-links="true" rotate="false" ></pagination>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Items per page</label>
-            <div class="col-md-8">
-                <input ng-model="pageSize" ng-change="pageSizeChange()" id="pageSize" name="pageSize" type="text" placeholder="3" class="form-control input-md3">
-            </div>
-        </div>
-
-        </fieldset>
-      </form>
     </div>
-    <div class="col-md-8">
-      <!--Body content-->
-
-      <ul class="products media-list">
-        <li ng-repeat="product in searchResult.products | orderBy:orderProp" class="media">
-          <a class="thumbnail pull-left" href="#">
-            <img class="media-object" src="http://responsive.hybris.com:9001{{product.images[0].url}}" alt="SUSHI" width="120">
-          </a>
-          <div class="media-body">
-            <a href="#/products/{{product.id}}">
-              <h4 class="media-heading">{{product.name}}</h4>
-            </a>
-            {{product.price.formattedValue}}
-          </div>
-        </li>
-      </ul>
-        <pagination on-select-page="setPage(page)" total-items="searchResult.pagination.totalResults" page="searchResult.pagination.currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
-    </div>
-  </div>
 </div>
