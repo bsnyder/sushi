@@ -19,7 +19,6 @@ describe('Product controllers', function() {
 
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, ProductSvc) {
       $httpBackend = _$httpBackend_;
-        products = ProductSvc;
 
       scope = $rootScope.$new();
       ctrl = $controller('ProductListCtrl', {
