@@ -4,6 +4,7 @@
 
 var productApp = angular.module('productApp', [
   'ngRoute',
+  'ui.bootstrap',
   'productControllers',
   'productFilters',
   'productServices'
@@ -12,7 +13,7 @@ var productApp = angular.module('productApp', [
 productApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/data', {
+      when('/', {
         templateUrl: 'partials/product-list.html',
         controller: 'ProductListCtrl',
         resolve: {
@@ -22,6 +23,6 @@ productApp.config(['$routeProvider',
         }
       }).
       otherwise({
-        redirectTo: '/data'
+        redirectTo: '/'
       });
   }]);
