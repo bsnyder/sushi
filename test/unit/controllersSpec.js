@@ -19,8 +19,8 @@ describe('Product controllers', function() {
 
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('data/products.json').
-          respond([{name: 'Shirt'}, {name: 'Hat'}]);
+      $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products').
+          respond({"products":[{name: 'Shirt'}, {name: 'Hat'}]});
 
       scope = $rootScope.$new();
       ctrl = $controller('ProductListCtrl', {$scope: scope});
@@ -28,17 +28,17 @@ describe('Product controllers', function() {
 
 
     it('should create "data" model with 2 data fetched from xhr', function() {
-      expect(scope.products).toEqualData([]);
+        console.log(scope.searchResult);
+      expect(scope.searchResult.products).toEqualData([]);
       $httpBackend.flush();
 
-      expect(scope.products).toEqualData(
-          [{name: 'Shirt'}, {name: 'Hat'}]);
+      expect(scope.searchResult.products).toEqualData({"products":[{name: 'Shirt'}, {name: 'Hat'}]});
     });
 
 
-    it('should set the default value of orderProp model', function() {
-      expect(scope.orderProp).toBe('name');
-    });
+//    it('should set the default value of orderProp model', function() {
+//      expect(scope.orderProp).toBe('name');
+//    });
   });
 
 /*
