@@ -15,24 +15,21 @@ describe('Product controllers', function() {
   beforeEach(module('productServices'));
 
   describe('ProductListCtrl', function(){
-    var scope, ctrl, $httpBackend;
+    var scope, ctrl, $httpBackend, products;
 
-    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, ProductSvc) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products').
-          respond({"products":[{name: 'Shirt'}, {name: 'Hat'}]});
 
       scope = $rootScope.$new();
-      ctrl = $controller('ProductListCtrl', {$scope: scope});
+      ctrl = $controller('ProductListCtrl', {
+          $scope: scope,
+          products: {"products":[{name: 'Shirt'}, {name: 'Hat'}]}
+      });
     }));
 
 
-    it('should create "data" model with 2 data fetched from xhr', function() {
-        console.log(scope.searchResult);
-      expect(scope.searchResult.products).toEqualData([]);
-      $httpBackend.flush();
-
-      expect(scope.searchResult.products).toEqualData({"products":[{name: 'Shirt'}, {name: 'Hat'}]});
+    it('should have list of products', function() {
+      expect(scope.searchResult).toEqualData({"products":[{name: 'Shirt'}, {name: 'Hat'}]});
     });
 
 
