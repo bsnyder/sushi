@@ -22,7 +22,12 @@ productApp.config(['$routeProvider',
             }]
         }
       }).
+        when('/view/:code', {
+            templateUrl: 'partials/product-detail.html',
+            controller: 'ProductDetailCtrl'
+        });/*.
       otherwise({
         redirectTo: '/'
       });
+      */
   }]);
