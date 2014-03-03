@@ -49,13 +49,13 @@
 
             <ul class="products media-list">
                 <li ng-repeat="product in searchResult.products | orderBy:orderProp" class="media">
-                    <a class="thumbnail pull-left" href="#">
+                    <a class="thumbnail pull-left" href="#/view/{{product.code}}">
                         <img class="media-object" src="http://responsive.hybris.com:9001{{product.images[0].url}}"
                              alt="SUSHI" width="120">
                     </a>
 
                     <div class="media-body">
-                        <a href="#/products/{{product.id}}">
+                        <a href="#/view/{{product.code}}">
                             <h4 class="media-heading">{{product.name}}</h4>
                         </a>
                         {{product.price.formattedValue}}

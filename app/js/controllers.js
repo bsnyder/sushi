@@ -32,3 +32,8 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'Product
         };
     }]);
 
+productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'ProductSvc',
+    function ($scope, $routeParams, ProductSvc) {
+        $scope.product = ProductSvc.query({query: $scope.query, code: $routeParams.code});
+    }]);
+
