@@ -14,13 +14,15 @@ productServices.factory('ProductSvc', ['$resource',
 
 productServices.factory('MultiProductLoader', ['ProductSvc', '$q',
     function(ProductSvc, $q) {
-        return function() {
-            var delay = $q.defer();
-            ProductSvc.query(function(products) {
-                delay.resolve(products);
-            }, function() {
-                delay.reject('Unable to fetch products');
-            });
-            return delay.promise;
+        return {
+            query: function(params) {
+                var delay = $q.defer();
+                ProductSvc.query(params, function(products) {
+                    delay.resolve(products);
+                }, function() {
+                    delay.reject('Unable to fetch products');
+                });
+                return delay.promise;
+             }
         };
     }]);

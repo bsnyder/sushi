@@ -4,8 +4,8 @@
 
 var productControllers = angular.module('productControllers', []);
 
-productControllers.controller('ProductListCtrl', ['$scope', 'products', 'ProductSvc',
-    function ($scope, products, ProductSvc) {
+productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiProductLoader',
+    function ($scope, products, MultiProductLoader) {
         $scope.searchResult = products;
 
         // default values
@@ -15,25 +15,37 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'Product
         // on change event of search input
         $scope.searchChange = function () {
             if ($scope.searchModel.length > 1) {
-                $scope.searchResult = ProductSvc.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0});
+               MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0}).then(
+                   function(products){
+                        $scope.searchResult = products;
+               });
             }
         };
 
         // on change event of page size input
         $scope.pageSizeChange = function () {
             if ($scope.pageSize.length > 0) {
-                $scope.searchResult = ProductSvc.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0});
+               MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0}).then(
+                    function(products){
+                        $scope.searchResult = products;
+                    });
             }
         };
 
         // pagination
         $scope.setPage = function (pageNo) {
-            $scope.searchResult = ProductSvc.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: pageNo-1});
+            MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: pageNo-1}).then(
+                function(products){
+                    $scope.searchResult = products;
+                });
         };
     }]);
 
-productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'ProductSvc',
-    function ($scope, $routeParams, ProductSvc) {
-        $scope.product = ProductSvc.query({query: $scope.searchModel, code: $routeParams.code, options: 'DESCRIPTION'});
+productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'MultiProductLoader',
+    function ($scope, $routeParams, MultiProductLoader) {
+        MultiProductLoader.query({query: $scope.searchModel, code: $routeParams.code, options: 'DESCRIPTION'}).then(
+            function(product){
+                $scope.product = product;
+            });
     }]);
 
