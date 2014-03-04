@@ -42,7 +42,7 @@ describe('Product controllers: ', function () {
         it('should invoke search function on scope.searchChange()', function () {
 
             // actual thing we want to test
-            $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?currentPage=0&options=DESCRIPTION,GALLERY,VARIANT_FULL,PRICE,STOCK,CATEGORIES&pageSize=5&query=foo').
+            $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?currentPage=0&pageSize=5&query=foo').
                 respond({"products": [
                     {name: 'Shirt'},
                     {name: 'Hat'}
@@ -64,7 +64,7 @@ describe('Product controllers: ', function () {
         it('should invoke search function on scope.pageSizeChange()', function () {
 
             // actual thing we want to test
-            $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?currentPage=0&options=DESCRIPTION,GALLERY,VARIANT_FULL,PRICE,STOCK,CATEGORIES&pageSize=5&query=foo').
+            $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?currentPage=0&pageSize=5&query=foo').
                 respond({"products": [
                     {name: 'Shirt'},
                     {name: 'Hat'}
@@ -86,7 +86,7 @@ describe('Product controllers: ', function () {
         it('should invoke search function on scope.setPage()', function () {
 
             // actual thing we want to test
-            $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?currentPage=1&options=DESCRIPTION,GALLERY,VARIANT_FULL,PRICE,STOCK,CATEGORIES&pageSize=5&query=foo').
+            $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?currentPage=1&pageSize=5&query=foo').
                 respond({"products": [
                     {name: 'Shirt'},
                     {name: 'Hat'}

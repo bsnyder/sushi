@@ -24,7 +24,7 @@ describe('Product services: ', function() {
         }));
 
         it('should load list of products', function() {
-            mockBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?options=DESCRIPTION,GALLERY,VARIANT_FULL,PRICE,STOCK,CATEGORIES&pageSize=3').respond({"products":[{name: 'Shirt'}, {name: 'Hat'}]});
+            mockBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?pageSize=3').respond({"products":[{name: 'Shirt'}, {name: 'Hat'}]});
 
             var products;
             scope.pageSize=3;

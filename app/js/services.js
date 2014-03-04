@@ -7,7 +7,7 @@ var productServices = angular.module('productServices', ['ngResource']);
 productServices.factory('ProductSvc', ['$resource',
     function($resource){
         return $resource('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products/:code', {code: '@code',
-            pageSize: 3, options: 'DESCRIPTION,GALLERY,VARIANT_FULL,PRICE,STOCK,CATEGORIES'}, {
+            pageSize: 3}, {
             query: {method:'GET', isArray:false}
         });
     }]);
