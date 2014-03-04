@@ -4,17 +4,17 @@
 
 describe('Sushi App', function() {
 
-  it('should redirect index.html to index.html#/data', function() {
+  it('should redirect index.html to index.html', function() {
     browser().navigateTo('app/index.html');
     // what does this do?
     // expect(browser().location().url()).toBe('/data');
   });
 
 
-  describe('Phone list view', function() {
+  describe('Product list view', function() {
 
     beforeEach(function() {
-      browser().navigateTo('app/index.html#/data');
+      browser().navigateTo('app/index.html');
     });
 
 
