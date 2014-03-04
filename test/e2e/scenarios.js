@@ -55,7 +55,7 @@ describe('Sushi App', function() {
 
 
   //   it('should render phone specific links', function() {
-  //     input('query').enter('nexus');
+  //     input('searchModel').enter('nexus');
   //     element('.data li a').click();
   //     expect(browser().location().url()).toBe('/data/nexus-s');
   //   });
