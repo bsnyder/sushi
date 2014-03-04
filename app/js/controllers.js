@@ -41,9 +41,9 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
         };
     }]);
 
-productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'MultiProductLoader',
-    function ($scope, $routeParams, MultiProductLoader) {
-        MultiProductLoader.query({query: $scope.searchModel, code: $routeParams.code, options: 'DESCRIPTION'}).then(
+productControllers.controller('ProductDetailCtrl', ['$scope', '$stateParams', 'MultiProductLoader',
+    function ($scope, $stateParams, MultiProductLoader) {
+        MultiProductLoader.query({query: $scope.searchModel, code: $stateParams.code, options: 'DESCRIPTION'}).then(
             function(product){
                 $scope.product = product;
             });
