@@ -18,16 +18,15 @@ productApp.config(['$routeProvider',
         controller: 'ProductListCtrl',
         resolve: {
             products: ["MultiProductLoader", function(MultiProductLoader) {
-                return MultiProductLoader();
+                return MultiProductLoader.query();
             }]
         }
       }).
         when('/view/:code', {
             templateUrl: 'partials/product-detail.html',
             controller: 'ProductDetailCtrl'
-        });/*.
+        }).
       otherwise({
         redirectTo: '/'
       });
-      */
   }]);

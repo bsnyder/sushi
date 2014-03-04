@@ -4,45 +4,54 @@
 
 describe('Sushi App', function() {
 
-  it('should redirect index.html to index.html#/data', function() {
+  it('should redirect index.html to index.html', function() {
     browser().navigateTo('app/index.html');
     // what does this do?
     // expect(browser().location().url()).toBe('/data');
   });
 
 
-  describe('Phone list view', function() {
+  describe('Product list view', function() {
 
     beforeEach(function() {
-      browser().navigateTo('app/index.html#/data');
+      browser().navigateTo('app/index.html');
     });
 
 
     it('should filter the phone list as user types into the search box', function() {
       expect(repeater('li.media').count()).toBe(3);
 
-      input('query').enter('monkeywrench');
+      input('searchModel').enter('monkeywrench');
       expect(repeater('li.media').count()).toBe(2);
 
-      input('query').enter('Flower');
+      input('searchModel').enter('Flower');
       input('pageSize').enter('100')
       expect(repeater('li.media').count()).toBe(9);
     });
 
+    it('should be possible to control product order via the drop down select box', function() {
+      input('searchModel').enter('snowboard'); //le t's narrow the dataset to make the test assertions shorter
+      console.log(repeater('li.media').count());
+      expect(repeater('li.media', 'Product List').column('product.name')).
+          toEqual(["Snowboard Ski Tool Red FBI 6",
+            "Snowboard Ski Tool Toko Base File Radial",
+            "Snowboard Ski Tool Toko Thermo Pad"]);
 
-    // it('should be possible to control product order via the drop down select box', function() {
-    //   input('query').enter('snowboard'); //let's narrow the dataset to make the test assertions shorter
+      select('orderProp').option('Price');
 
-    //   expect(repeater('li.media', 'Phone List').column('phone.name')).
-    //       toEqual(["Motorola XOOM\u2122 with Wi-Fi",
-    //                "MOTOROLA XOOM\u2122"]);
+      expect(repeater('li.media', 'Product List').column('product.name')).
+          toEqual(["Snowboard Ski Tool Toko Base File Radial",
+            "Snowboard Ski Tool Red FBI 6",
+            "Snowboard Ski Tool Toko Thermo Pad"]);
 
-    //   select('orderProp').option('Alphabetical');
+      select('orderProp').option('Alphabetical');
 
-    //   expect(repeater('.data li', 'Phone List').column('phone.name')).
-    //       toEqual(["MOTOROLA XOOM\u2122",
-    //                "Motorola XOOM\u2122 with Wi-Fi"]);
-    // });
+      expect(repeater('li.media', 'Product List').column('product.name')).
+          toEqual(["Snowboard Ski Tool Red FBI 6",
+          "Snowboard Ski Tool Toko Base File Radial",
+          "Snowboard Ski Tool Toko Thermo Pad"]);    
+
+    });
 
 
   //   it('should render phone specific links', function() {

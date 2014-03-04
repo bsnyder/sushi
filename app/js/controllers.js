@@ -4,8 +4,8 @@
 
 var productControllers = angular.module('productControllers', []);
 
-productControllers.controller('ProductListCtrl', ['$scope', 'products', 'ProductSvc',
-    function ($scope, products, ProductSvc) {
+productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiProductLoader',
+    function ($scope, products, MultiProductLoader) {
         $scope.searchResult = products;
 
         // default values
@@ -14,21 +14,30 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'Product
 
         // on change event of search input
         $scope.searchChange = function () {
-            if ($scope.query.length > 1) {
-                $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: 0});
+            if ($scope.searchModel.length > 1) {
+               MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0}).then(
+                   function(products){
+                        $scope.searchResult = products;
+               });
             }
         };
 
         // on change event of page size input
         $scope.pageSizeChange = function () {
             if ($scope.pageSize.length > 0) {
-                $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: 0});
+                $scope.searchResult = MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0}).then(
+                    function(products){
+                        $scope.searchResult = products;
+                    });
             }
         };
 
         // pagination
         $scope.setPage = function (pageNo) {
-            $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: pageNo-1});
+            $scope.searchResult = MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: pageNo-1}).then(
+                function(products){
+                    $scope.searchResult = products;
+                });
         };
     }]);
 
