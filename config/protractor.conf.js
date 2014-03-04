@@ -1,10 +1,9 @@
 exports.config = {
 
 	specs: [
-		'./../test/e2e/*.spec.js'
+		'./../test/protractor/*.spec.js'
 	],
 
-// TODO: get phantomjs workinggit 
 	capabilities: {
 		'browserName': 'phantomjs'
 	},

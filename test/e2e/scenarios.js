@@ -21,16 +21,16 @@ describe('Sushi App', function() {
     it('should filter the phone list as user types into the search box', function() {
       expect(repeater('li.media').count()).toBe(3);
 
-      input('query').enter('monkeywrench');
+      input('searchModel').enter('monkeywrench');
       expect(repeater('li.media').count()).toBe(2);
 
-      input('query').enter('Flower');
+      input('searchModel').enter('Flower');
       input('pageSize').enter('100')
       expect(repeater('li.media').count()).toBe(9);
     });
 
     it('should be possible to control product order via the drop down select box', function() {
-      input('query').enter('snowboard'); //le t's narrow the dataset to make the test assertions shorter
+      input('searchModel').enter('snowboard'); //le t's narrow the dataset to make the test assertions shorter
       console.log(repeater('li.media').count());
       expect(repeater('li.media', 'Product List').column('product.name')).
           toEqual(["Snowboard Ski Tool Red FBI 6",
@@ -55,7 +55,7 @@ describe('Sushi App', function() {
 
 
   //   it('should render phone specific links', function() {
-  //     input('query').enter('nexus');
+  //     input('searchModel').enter('nexus');
   //     element('.data li a').click();
   //     expect(browser().location().url()).toBe('/data/nexus-s');
   //   });
