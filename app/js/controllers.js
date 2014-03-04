@@ -12,29 +12,29 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
         $scope.orderProp = 'name';
         $scope.pageSize = '3';
 
-        function searchProducts(currentPage) {
-            MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: currentPage}).then(
+        function searchProducts(searchModel, pageSize, currentPage) {
+            MultiProductLoader.query({query: searchModel, pageSize: pageSize, currentPage: currentPage}).then(
                 function(products){
                     $scope.searchResult = products;
                 });
         }
         // on change event of search input
-        $scope.searchChange = function () {
-            if ($scope.searchModel.length > 1) {
-                searchProducts(0);
+        $scope.searchChange = function (searchModel, pageSize) {
+            if (searchModel.length > 1) {
+                searchProducts(searchModel, pageSize, 0);
             }
         };
 
         // on change event of page size input
-        $scope.pageSizeChange = function () {
+        $scope.pageSizeChange = function (searchModel, pageSize) {
             if ($scope.pageSize.length > 0) {
-               searchProducts(0);
+               searchProducts(searchModel, pageSize, 0);
             }
         };
 
         // pagination
-        $scope.setPage = function (pageNo) {
-            searchProducts(pageNo-1);
+        $scope.setPage = function (searchModel, pageSize, pageNo) {
+            searchProducts(searchModel, pageSize, pageNo-1);
         };
     }]);
 
