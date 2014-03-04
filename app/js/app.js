@@ -18,7 +18,7 @@ productApp.config(['$routeProvider',
         controller: 'ProductListCtrl',
         resolve: {
             products: ["MultiProductLoader", function(MultiProductLoader) {
-                return MultiProductLoader();
+                return MultiProductLoader.query();
             }]
         }
       }).
