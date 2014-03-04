@@ -4,10 +4,10 @@ exports.config = {
 		'./../test/e2e/*.spec.js'
 	],
 
-// TODO: get phantomjs working
-	// capabilities: {
-	// 	'browserName': 'PhantomJS'
-	// },
+// TODO: get phantomjs workinggit 
+	capabilities: {
+		'browserName': 'phantomjs'
+	},
 
 	baseUrl: 'http://localhost:8000'
 
