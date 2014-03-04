@@ -34,6 +34,26 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'Product
 
 productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'ProductSvc',
     function ($scope, $routeParams, ProductSvc) {
-        $scope.product = ProductSvc.query({query: $scope.query, code: $routeParams.code});
+        ProductSvc.query({query: $scope.query, code: $routeParams.code}, function(product){
+            console.log("success", product);
+            $scope.product = product;
+            /*
+                separate description and features (both are crammed in the same string in the response)
+                features will be an array of strings
+             */
+            if (product.description.indexOf("Features:") != -1) {
+                var stringArray = product.description.split("Features:");
+                $scope.product.description = stringArray[0];
+                $scope.product.features = stringArray[1].split("+ ");
+                if ($scope.product.features[0] === "") {
+                    $scope.product.features.splice(0, 1);
+                }
+                if ($scope.product.description === "") {
+                    $scope.product.description = "No description";
+                }
+            }
+        }, function(error){
+            console.log("request failed");
+        });
     }]);
 

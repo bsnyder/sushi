@@ -1,5 +1,18 @@
-<img ng-src="http://responsive.hybris.com:9001{{product.images[0].url}}" class="product">
+<div id="main-wrap">
 
-<h1>{{product.name}}</h1>
+    <div id="left">
+        <img ng-src="http://responsive.hybris.com:9001{{product.images[0].url}}" class="product">
+    </div>
 
-<p>{{product.description}}</p>
+    <div id="right">
+        <h1>{{product.name}}</h1>
+        <tabset justified="true">
+            <tab heading="Description">{{product.description}}</tab>
+            <tab heading="Features"><ul><li ng-repeat="feature in product.features">{{feature}}</li></ul></tab>
+            <tab heading="Buy">
+
+            </tab>
+        </tabset>
+    </div>
+
+</div>
