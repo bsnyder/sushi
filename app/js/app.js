@@ -5,28 +5,29 @@
 var productApp = angular.module('productApp', [
   'ngRoute',
   'ui.bootstrap',
+  'ui.router',
   'productControllers',
   'productFilters',
   'productServices'
 ]);
 
-productApp.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/', {
-        templateUrl: 'partials/product-list.html',
-        controller: 'ProductListCtrl',
-        resolve: {
-            products: ["MultiProductLoader", function(MultiProductLoader) {
-                return MultiProductLoader.query();
-            }]
-        }
-      }).
-        when('/view/:code', {
+productApp.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/");
+
+    $stateProvider
+        .state('home', {
+            url: '/',
+            templateUrl: 'partials/product-list.html',
+            controller: 'ProductListCtrl',
+            resolve: {
+                products: ["MultiProductLoader", function(MultiProductLoader) {
+                    return MultiProductLoader.query();
+                }]
+            }
+        })
+        .state('view', {
+            url: '/view/:code',
             templateUrl: 'partials/product-detail.html',
             controller: 'ProductDetailCtrl'
-        }).
-      otherwise({
-        redirectTo: '/'
-      });
-  }]);
+        })
+})
