@@ -1,72 +1,88 @@
 'use strict';
 
 /* jasmine specs for controllers go here */
-describe('Product controllers', function() {
+describe('Product controllers', function () {
 
-  beforeEach(function(){
-    this.addMatchers({
-      toEqualData: function(expected) {
-        return angular.equals(this.actual, expected);
-      }
-    });
-  });
-
-  beforeEach(module('productApp'));
-  beforeEach(module('productServices'));
-
-  describe('ProductListCtrl', function(){
-    var scope, ctrl, $httpBackend;
-
-    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
-      $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?pageSize=20&productId=products').
-          respond({"products":[{name: 'Shirt'}, {name: 'Hat'}]});
-
-      scope = $rootScope.$new();
-      ctrl = $controller('ProductListCtrl', {$scope: scope});
-    }));
-
-
-    it('should create "data" model with 2 data fetched from xhr', function() {
-      expect(scope.searchResults.products).toBeUndefined();
-      $httpBackend.flush();
-
-      expect(scope.searchResults).toEqualData(
-          {"products":[{name: 'Shirt'}, {name: 'Hat'}]});
+    beforeEach(function () {
+        this.addMatchers({
+            toEqualData: function (expected) {
+                return angular.equals(this.actual, expected);
+            }
+        });
     });
 
+    beforeEach(module('productApp'));
+    beforeEach(module('productServices'));
 
-    it('should set the default value of orderProp model', function() {
-      expect(scope.orderProp).toBe('name');
+    describe('ProductListCtrl - basic GET', function () {
+        var scope, ctrl, $httpBackend;
+
+        beforeEach(inject(function (_$httpBackend_, $rootScope, $controller) {
+            $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?pageSize=20&productId=products').
+                respond({"products": [
+                    {name: 'Shirt'},
+                    {name: 'Hat'}
+                ]});
+
+            scope = $rootScope.$new();
+            ctrl = $controller('ProductListCtrl', {$scope: scope});
+        }));
+
+
+        it('should create "data" model with 2 data fetched from xhr', function () {
+            expect(scope.searchResults.products).toBeUndefined();
+            $httpBackend.flush();
+
+            expect(scope.searchResults).toEqualData(
+                {"products": [
+                    {name: 'Shirt'},
+                    {name: 'Hat'}
+                ]});
+        });
+
+
+        it('should set the default value of orderProp model', function () {
+            expect(scope.orderProp).toBe('name');
+        });
+
     });
-  });
 
-/*
-  describe('PhoneDetailCtrl', function(){
-    var scope, $httpBackend, ctrl,
-        xyzPhoneData = function() {
-          return {
-            name: 'phone xyz',
-                images: ['image/url1.png', 'image/url2.png']
-          }
-        };
+    describe('ProductListCtrl - on change', function () {
+        var scope, ctrl, $httpBackend;
 
+        beforeEach(inject(function (_$httpBackend_, $rootScope, $controller) {
+            $httpBackend = _$httpBackend_;
+            // initial data load triggered by controller constructor
+            $httpBackend.expectGET("http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?pageSize=20&productId=products").respond({"products": [
+                {name: 'Bar'}
+            ]});
 
-    beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
-      $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('data/xyz.json').respond(xyzPhoneData());
+            scope = $rootScope.$new();
+            ctrl = $controller('ProductListCtrl', {$scope: scope});
+        }));
 
-      $routeParams.phoneId = 'xyz';
-      scope = $rootScope.$new();
-      ctrl = $controller('PhoneDetailCtrl', {$scope: scope});
-    }));
-
-
-    it('should fetch phone detail', function() {
-      expect(scope.phone).toEqualData({});
-      $httpBackend.flush();
-
-      expect(scope.phone).toEqualData(xyzPhoneData());
+        it('should invoke search function on change', function () {
+            $httpBackend.flush(); // flush initial product load
+            expect(scope.searchResults).toEqualData(
+                {"products": [
+                    {name: 'Bar'}
+                ]});
+            $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?pageSize=20&productId=products&query=foo').
+                respond({"products": [
+                    {name: 'Shirt'},
+                    {name: 'Hat'}
+                ]});
+            scope.searchModel = 'foo';
+            scope.change();
+            $httpBackend.flush();
+            expect(scope.searchResults).toEqualData(
+                {"products": [
+                    {name: 'Shirt'},
+                    {name: 'Hat'}
+                ]});
+        });
     });
-  });*/
+
+
 });
