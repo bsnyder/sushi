@@ -14,7 +14,7 @@ describe('Product controllers', function () {
     beforeEach(module('productApp'));
     beforeEach(module('productServices'));
 
-    describe('ProductListCtrl - basic GET', function () {
+    describe('ProductListCtrl - basic GET on application load', function () {
         var scope, ctrl, $httpBackend;
 
         beforeEach(inject(function (_$httpBackend_, $rootScope, $controller) {
@@ -46,35 +46,17 @@ describe('Product controllers', function () {
             expect(scope.orderProp).toBe('name');
         });
 
-    });
-
-    describe('ProductListCtrl - on change', function () {
-        var scope, ctrl, $httpBackend;
-
-        beforeEach(inject(function (_$httpBackend_, $rootScope, $controller) {
-            $httpBackend = _$httpBackend_;
-            // initial data load triggered by controller constructor
-            $httpBackend.expectGET("http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?pageSize=20&productId=products").respond({"products": [
-                {name: 'Bar'}
-            ]});
-
-            scope = $rootScope.$new();
-            ctrl = $controller('ProductListCtrl', {$scope: scope});
-        }));
-
-        it('should invoke search function on change', function () {
+        it('should invoke search function on scope.getNewProductSearch()', function () {
             $httpBackend.flush(); // flush initial product load
-            expect(scope.searchResults).toEqualData(
-                {"products": [
-                    {name: 'Bar'}
-                ]});
+
+            // actual thing we want to test
             $httpBackend.expectGET('http://responsive.hybris.com:9001/rest/v1/apparel-uk/products?pageSize=20&productId=products&query=foo').
                 respond({"products": [
                     {name: 'Shirt'},
                     {name: 'Hat'}
                 ]});
             scope.searchModel = 'foo';
-            scope.change();
+            scope.getNewProductSearch();
             $httpBackend.flush();
             expect(scope.searchResults).toEqualData(
                 {"products": [
@@ -82,7 +64,9 @@ describe('Product controllers', function () {
                     {name: 'Hat'}
                 ]});
         });
+
     });
+
 
 
 });

@@ -9,7 +9,7 @@ productControllers.controller('ProductListCtrl', ['$scope', 'ProductSvc',
     $scope.searchResults = ProductSvc.query();
     $scope.orderProp = 'name';
 
-    $scope.change = function() {
+    $scope.getNewProductSearch = function() {
         if ($scope.searchModel.length > 1) {
             $scope.searchResults = ProductSvc.query ({query: $scope.searchModel});
         }
