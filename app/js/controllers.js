@@ -25,7 +25,7 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
         // on change event of page size input
         $scope.pageSizeChange = function () {
             if ($scope.pageSize.length > 0) {
-                $scope.searchResult = MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0}).then(
+               MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0}).then(
                     function(products){
                         $scope.searchResult = products;
                     });
@@ -34,15 +34,18 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
 
         // pagination
         $scope.setPage = function (pageNo) {
-            $scope.searchResult = MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: pageNo-1}).then(
+            MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: pageNo-1}).then(
                 function(products){
                     $scope.searchResult = products;
                 });
         };
     }]);
 
-productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'ProductSvc',
+productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'MultiProductLoader',
     function ($scope, $routeParams, MultiProductLoader) {
-        $scope.product = MultiProductLoader.query({query: $scope.searchModel, code: $routeParams.code, options: 'DESCRIPTION'});
+        MultiProductLoader.query({query: $scope.searchModel, code: $routeParams.code, options: 'DESCRIPTION'}).then(
+            function(product){
+                $scope.product = product;
+            });
     }]);
 
