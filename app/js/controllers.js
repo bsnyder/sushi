@@ -14,26 +14,26 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'Product
 
         // on change event of search input
         $scope.searchChange = function () {
-            if ($scope.query.length > 1) {
-                $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: 0});
+            if ($scope.searchModel.length > 1) {
+                $scope.searchResult = ProductSvc.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0});
             }
         };
 
         // on change event of page size input
         $scope.pageSizeChange = function () {
             if ($scope.pageSize.length > 0) {
-                $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: 0});
+                $scope.searchResult = ProductSvc.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0});
             }
         };
 
         // pagination
         $scope.setPage = function (pageNo) {
-            $scope.searchResult = ProductSvc.query({query: $scope.query, pageSize: $scope.pageSize, currentPage: pageNo-1});
+            $scope.searchResult = ProductSvc.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: pageNo-1});
         };
     }]);
 
 productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'ProductSvc',
     function ($scope, $routeParams, ProductSvc) {
-        $scope.product = ProductSvc.query({query: $scope.query, code: $routeParams.code, options: 'DESCRIPTION'});
+        $scope.product = ProductSvc.query({query: $scope.searchModel, code: $routeParams.code, options: 'DESCRIPTION'});
     }]);
 
