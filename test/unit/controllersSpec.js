@@ -48,10 +48,7 @@ describe('Product controllers: ', function () {
                     {name: 'Hat'}
                 ]});
 
-            scope.searchModel = 'foo';
-            scope.pageSize = '5';
-
-            scope.searchChange();
+            scope.searchChange('foo', 5);
 
             $httpBackend.flush();
             expect(scope.searchResult).toEqualData(
@@ -70,10 +67,7 @@ describe('Product controllers: ', function () {
                     {name: 'Hat'}
                 ]});
 
-            scope.searchModel = 'foo';
-            scope.pageSize = '5';
-
-            scope.pageSizeChange();
+            scope.pageSizeChange('foo', 5);
 
             $httpBackend.flush();
             expect(scope.searchResult).toEqualData(
@@ -92,10 +86,7 @@ describe('Product controllers: ', function () {
                     {name: 'Hat'}
                 ]});
 
-            scope.searchModel = 'foo';
-            scope.pageSize = '5';
-
-            scope.setPage(2);
+            scope.setPage('foo', 5, 2);
 
             $httpBackend.flush();
             expect(scope.searchResult).toEqualData(

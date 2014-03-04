@@ -14,7 +14,7 @@
                         <label class="col-md-4 control-label" for="textinput">Search</label>
 
                         <div class="col-md-8">
-                            <input ng-model="searchModel" ng-change="searchChange()" id="textinput" name="textinput"
+                            <input ng-model="searchModel" ng-change="searchChange(searchModel, pageSize)" id="textinput" name="textinput"
                                    type="text" placeholder="Enter your search text" class="form-control input-md3">
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                         <label class="col-md-4 control-label" for="textinput">Items per page</label>
 
                         <div class="col-md-8">
-                            <input ng-model="pageSize" ng-change="pageSizeChange()" id="pageSize" name="pageSize"
+                            <input ng-model="pageSize" ng-change="pageSizeChange(searchModel, pageSize)" id="pageSize" name="pageSize"
                                    type="text" placeholder="3" class="form-control input-md3">
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     </div>
                 </li>
             </ul>
-            <pagination on-select-page="setPage(page)" total-items="searchResult.pagination.totalResults"
+            <pagination on-select-page="setPage(searchModel, pageSize, page)" total-items="searchResult.pagination.totalResults"
                         page="searchResult.pagination.currentPage + 1"
                         items-per-page="pageSize" max-size="5" class="pagination-sm"
                         boundary-links="true" rotate="false" ></pagination>
