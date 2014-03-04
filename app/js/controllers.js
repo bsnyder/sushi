@@ -12,32 +12,29 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
         $scope.orderProp = 'name';
         $scope.pageSize = '3';
 
+        function searchProducts(currentPage) {
+            MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: currentPage}).then(
+                function(products){
+                    $scope.searchResult = products;
+                });
+        }
         // on change event of search input
         $scope.searchChange = function () {
             if ($scope.searchModel.length > 1) {
-               MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0}).then(
-                   function(products){
-                        $scope.searchResult = products;
-               });
+                searchProducts(0);
             }
         };
 
         // on change event of page size input
         $scope.pageSizeChange = function () {
             if ($scope.pageSize.length > 0) {
-                $scope.searchResult = MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: 0}).then(
-                    function(products){
-                        $scope.searchResult = products;
-                    });
+               searchProducts(0);
             }
         };
 
         // pagination
         $scope.setPage = function (pageNo) {
-            $scope.searchResult = MultiProductLoader.query({query: $scope.searchModel, pageSize: $scope.pageSize, currentPage: pageNo-1}).then(
-                function(products){
-                    $scope.searchResult = products;
-                });
+            searchProducts(pageNo-1);
         };
     }]);
 
