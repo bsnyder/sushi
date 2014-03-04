@@ -4,9 +4,9 @@
 
 var productControllers = angular.module('productControllers', []);
 
-productControllers.controller('ProductListCtrl', ['$scope', 'ProductSvc',
-  function($scope, ProductSvc) {
-    $scope.searchResults = ProductSvc.query();
+productControllers.controller('ProductListCtrl', ['$scope', 'products', 'ProductSvc',
+  function($scope, products, ProductSvc) {
+    $scope.searchResults = products;
     $scope.orderProp = 'name';
 
     $scope.getNewProductSearch = function() {

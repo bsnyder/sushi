@@ -10,3 +10,17 @@ productServices.factory('ProductSvc', ['$resource',
           query: {method:'GET', params:{productId:'products'}, isArray:false}
     });
   }]);
+
+productServices.factory('MultiProductLoader', ['ProductSvc', '$q',
+    function(ProductSvc, $q) {
+        return function() {
+            var delay = $q.defer();
+            ProductSvc.query(function(products) {
+                delay.resolve(products);
+            }, function() {
+                delay.reject('Unable to fetch products');
+            });
+            return delay.promise;
+        };
+    }]);
+

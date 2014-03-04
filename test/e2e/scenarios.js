@@ -2,7 +2,7 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('PhoneCat App', function() {
+describe('Sushi App', function() {
 
   it('should redirect index.html to index.html#/data', function() {
     browser().navigateTo('app/index.html');
@@ -10,7 +10,7 @@ describe('PhoneCat App', function() {
   });
 
 
-  describe('Phone list view', function() {
+  describe('Product list view', function() {
 
     beforeEach(function() {
       browser().navigateTo('app/index.html#/data');
@@ -20,14 +20,14 @@ describe('PhoneCat App', function() {
     it('should filter the phone list as user types into the search box', function() {
       expect(repeater('.data li').count()).toBe(20);
 
-      input('query').enter('nexus');
-      expect(repeater('.data li').count()).toBe(1);
 
-      input('query').enter('motorola');
-      expect(repeater('.data li').count()).toBe(8);
+      input('query').enter('shirt');
+      expect(repeater('.data li').count()).toBe(20);
+
+
     });
 
-
+/*
     it('should be possible to control phone order via the drop down select box', function() {
       input('query').enter('tablet'); //let's narrow the dataset to make the test assertions shorter
 
@@ -47,10 +47,10 @@ describe('PhoneCat App', function() {
       input('query').enter('nexus');
       element('.data li a').click();
       expect(browser().location().url()).toBe('/data/nexus-s');
-    });
+    }); */
   });
 
-
+/*
   describe('Phone detail view', function() {
 
     beforeEach(function() {
@@ -75,5 +75,5 @@ describe('PhoneCat App', function() {
       element('.phone-thumbs li:nth-child(1) img').click();
       expect(element('img.phone').attr('src')).toBe('img/data/nexus-s.0.jpg');
     });
-  });
+  });*/
 });

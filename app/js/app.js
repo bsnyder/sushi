@@ -14,8 +14,13 @@ productApp.config(['$routeProvider',
     $routeProvider.
       when('/data', {
         templateUrl: 'partials/product-list.html',
-        controller: 'ProductListCtrl'
-      }).
+            controller: 'ProductListCtrl',
+            resolve: {
+                products: ["MultiProductLoader", function(MultiProductLoader) {
+                    return MultiProductLoader();
+                }]
+            }
+        }).
       otherwise({
         redirectTo: '/data'
       });
