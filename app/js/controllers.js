@@ -40,6 +40,7 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
 
 productControllers.controller('ProductDetailCtrl', ['$scope', '$stateParams', 'MultiProductLoader',
     function ($scope, $stateParams, MultiProductLoader) {
+
         MultiProductLoader.query({
                 query: $scope.searchModel,
                 code: $stateParams.code,
