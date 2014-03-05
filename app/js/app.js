@@ -16,14 +16,10 @@ productApp.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
         .state('home', {
-            url: '/',
+            url: '/?searchModel&pageSize&currentPage',
             templateUrl: 'partials/product-list.html',
             controller: 'ProductListCtrl',
-            resolve: {
-                products: ["MultiProductLoader", function(MultiProductLoader) {
-                    return MultiProductLoader.query();
-                }]
-            }
+            reloadOnSearch: false
         })
         .state('view', {
             url: '/view/:code',

@@ -4,23 +4,22 @@
 
 var productControllers = angular.module('productControllers', []);
 
-productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiProductLoader',
-    function ($scope, products, MultiProductLoader) {
-        $scope.searchResult = products;
+productControllers.controller('ProductListCtrl', ['$scope', '$stateParams', '$location', 'MultiProductLoader',
+    function ($scope, $stateParams, $location, MultiProductLoader) {
 
         // default values
-        $scope.orderProp = 'name';
-        $scope.pageSize = '3';
+        $scope.searchModel = $stateParams.searchModel;
+        $scope.pageSize = ($stateParams.pageSize || 3);
+        $scope.currentPage = ($stateParams.currentPage || 0);
 
-        function searchProducts(searchModel, pageSize, currentPage) {
-            MultiProductLoader.query({query: searchModel, pageSize: pageSize, currentPage: currentPage}).then(
-                function(products){
-                    $scope.searchResult = products;
-                });
-        }
+        $scope.orderProp = 'name';
+
+        searchProducts($scope.searchModel, $scope.pageSize, $scope.currentPage);
+
         // on change event of search input
         $scope.searchChange = function (searchModel, pageSize) {
             if (searchModel.length > 1) {
+                $location.search({ searchModel: searchModel, pageSize: pageSize, currentPage: 0});
                 searchProducts(searchModel, pageSize, 0);
             }
         };
@@ -28,14 +27,23 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
         // on change event of page size input
         $scope.pageSizeChange = function (searchModel, pageSize) {
             if ($scope.pageSize.length > 0) {
+               $location.search({ searchModel: searchModel, pageSize: pageSize, currentPage: 0});
                searchProducts(searchModel, pageSize, 0);
             }
         };
 
         // pagination
         $scope.setPage = function (searchModel, pageSize, pageNo) {
+            $location.search({ searchModel: searchModel, pageSize: pageSize, currentPage: pageNo});
             searchProducts(searchModel, pageSize, pageNo-1);
         };
+
+        function searchProducts(searchModel, pageSize, currentPage) {
+            MultiProductLoader.query({query: searchModel, pageSize: pageSize, currentPage: currentPage}).then(
+                function(products){
+                    $scope.searchResult = products;
+                });
+        }
     }]);
 
 productControllers.controller('ProductDetailCtrl', ['$scope', '$stateParams', 'MultiProductLoader',
