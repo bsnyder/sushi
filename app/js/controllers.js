@@ -12,6 +12,8 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
         $scope.orderProp = 'name';
         $scope.pageSize = '3';
         $scope.compareCount = 0;
+        $scope.prod1 = '';
+        $scope.prod2 = '';
         $scope.isCompareDisabled = function () {
             var disabled = this.compareCount === 2;
             console.log("is compare disabled: "+disabled);
@@ -43,9 +45,15 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
             searchProducts(searchModel, pageSize, pageNo-1);
         };
 
-        $scope.changeCompareCount = function(selected) {
+        $scope.changeCompareCount = function(selected, productId) {
             $scope.compareCount += selected ? 1 : -1;
-            console.log('compare count is '+$scope.compareCount);
+            if($scope.compareCount === 1) {
+                $scope.prod1 = productId;
+                $scope.prod2 = '';
+            } else {
+                $scope.prod2 = productId;
+            }
+            console.log('compare count is '+$scope.compareCount+'; product code is '+productId);
         }
     }]);
 
