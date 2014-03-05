@@ -11,12 +11,19 @@ module.exports = function(grunt) {
         src: 'app/**/*.js',
         dest: 'build/<%= pkg.name %>.min.js'
       }
+    },
+
+    protractor: {
+      options: {
+        configFile: 'config/protractor.conf.js',
+        keepAlive: true,
+      }
     }
   });
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
-
+  grunt.loadNpmTasks('grunt-protractor-runner');
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
 
