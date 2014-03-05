@@ -47,7 +47,7 @@
         <div class="col-md-8">
             <!--Body content-->
             <div>
-                <a href="#/compare/l/{{prod1}}/r/{{prod2}}"><button type="button" class="btn btn-lg btn-primary" ng-model="button">Compare selected products</button></a>
+                <a href="#/compare/l/{{prod1}}/r/{{prod2}}"><button type="button" class="btn btn-lg btn-primary" ng-disabled="!isCompareDisabled()">Compare selected products</button></a>
             </div>
             <ul class="products media-list">
                 <li ng-repeat="product in searchResult.products | orderBy:orderProp" class="media">

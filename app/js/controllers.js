@@ -53,7 +53,7 @@ productControllers.controller('ProductListCtrl', ['$scope', 'products', 'MultiPr
             } else {
                 $scope.prod2 = productId;
             }
-            console.log('compare count is '+$scope.compareCount+'; product code is '+productId);
+            //console.log('compare count is '+$scope.compareCount+'; product code is '+productId);
         }
     }]);
 
