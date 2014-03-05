@@ -119,7 +119,7 @@ productControllers.controller('ProductComparisonCtrl', ['$scope', '$stateParams'
                  features will be an array of strings
                  */
                 if (product2.description.indexOf("Features:") != -1) {
-                    var stringArray = product.description.split("Features:");
+                    var stringArray = product2.description.split("Features:");
                     $scope.product2.description = stringArray[0];
                     $scope.product2.features = stringArray[1].split("+ ");
                     if ($scope.product2.features[0] === "") {
