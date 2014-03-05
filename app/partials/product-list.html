@@ -46,9 +46,14 @@
         </div>
         <div class="col-md-8">
             <!--Body content-->
-
+            <div>
+                <a href="#/compare/l/{{product.code}}/r/{{product.code}}">Check to compare</a>
+            </div>
             <ul class="products media-list">
                 <li ng-repeat="product in searchResult.products | orderBy:orderProp" class="media">
+                    <div class="media-check">
+                        <input type="checkbox" id="{{'comp'+product.code}}" name="{{'comp'+product.code}}"/>
+                    </div>
                     <a class="thumbnail pull-left" href="#/view/{{product.code}}">
                         <img class="media-object" src="http://responsive.hybris.com:9001{{product.images[0].url}}"
                              alt="SUSHI" width="120">
