@@ -7,10 +7,11 @@ describe("product page", function () {
 	describe("verify page", function () {
 
 		    var productCount = element.all(by.css('li.media'));
+		    //TODO: get array and assert on all products
 		    var productList = element(by.css('li.media'));
       		var searchBox = element(by.model('searchModel'));
       		var pageSize = element(by.model('pageSize'));
-
+      		var orderProp = element(by.model('orderProp'))
 
 
 		it("should display correct title", function () {
@@ -38,7 +39,16 @@ describe("product page", function () {
 	    	//test default
 	    	searchBox.clear();
 	    	searchBox.sendKeys("snowboard");
+
     		expect(productList.getText()).toEqual("Snowboard Ski Tool Red FBI 6\n\u00A316.96");
+
+
+    		// TODO: doesn't work in phantom, only in chrome.
+    		// orderProp.sendKeys('Price')
+
+    		// expect(productList.getText()).toEqual("Snowboard Ski Tool Toko Base File Radial\n\u00A315.26");
+
+
 	    });
 
 	});	
