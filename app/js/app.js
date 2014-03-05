@@ -30,4 +30,9 @@ productApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'partials/product-detail.html',
             controller: 'ProductDetailCtrl'
         })
+        .state('product-comparison', {
+            url: '/compare/l/:prod1/r/:prod2',
+            templateUrl: 'partials/product-comparison.html',
+            controller: 'ProductComparisonCtrl'
+        })
 })
