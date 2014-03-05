@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row" id="main-wrap">
+        <div class="col-md-6">
+            <img ng-src="http://responsive.hybris.com:9001{{product1.images[0].url}}" class="product">
+            <h1>{{product.name}}</h1>
+            <tabset justified="true">
+                <tab heading="Description">{{product1.description}}</tab>
+                <tab heading="Features"><ul><li ng-repeat="feature in product1.features">{{feature}}</li></ul></tab>
+                <tab heading="Buy">
+
+                </tab>
+            </tabset>
+        </div>
+        <div class="col-md-6">
+            <img ng-src="http://responsive.hybris.com:9001{{product2.images[0].url}}" class="product">
+            <h1>{{product.name}}</h1>
+            <tabset justified="true">
+                <tab heading="Description">{{product2.description}}</tab>
+                <tab heading="Features"><ul><li ng-repeat="feature in product2.features">{{feature}}</li></ul></tab>
+                <tab heading="Buy">
+
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>
