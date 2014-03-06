@@ -24,20 +24,36 @@ module.exports = function(grunt) {
         args: {
           seleniumServerJar: 'selenium/selenium-server-standalone-2.40.0.jar',
           seleniumPort: '4444',
-          browser: "firefox"
+          browser: ['firefox']
+        }
+      }
+    },
+    run_chrome: {
+      options: {
+        args: {
+          seleniumServerJar: 'selenium/selenium-server-standalone-2.40.0.jar',
+          seleniumPort: '4444',
+          chromeDriver: 'node_modules/chromedriver/bin/chromedriver',
+          browser: ['chrome']
+
         }
       }
     }
-  }  
+  },  
+
+  phantomjs: {
+
+  }
 
   });
 
-  // Load the plugin that provides the "uglify" task.
+  // Load the plugins
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-protractor-runner');
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
 grunt.registerTask('test', 'Run Protractor using Firefox',
-    ['protractor:run_firefox']);
+    ['protractor:run_firefox',
+    'protractor:run_chrome']);
 
 };
